@@ -1,4 +1,3 @@
-# filepath: /home/heartrate7/Coding Things/Task Manager/task_manager.py
 import json
 from pathlib import Path
 from datetime import datetime
@@ -13,10 +12,7 @@ import os
 This module provides a simple task manager application.
 
 The main function initializes a TaskManager instance, which is responsible for managing tasks.
-The TaskManager class is assumed to be defined elsewhere in the codebase.
 
-Example usage:
-    $ python main.py
 """
 
 #Get the current date and time
@@ -74,14 +70,11 @@ def save_tasks(tasks):
     If the tasks are already dicts, they are saved directly to the JSON file.
     If the tasks are Task objects, their dictionaries are extracted using the __dict__ method.
 
-    :param tasks: A list of tasks to be saved.
-    :type tasks: list
     """
     DATA_FILE.write_text(json.dumps(tasks, indent=2))
 
 
 
-# filepath: /home/heartrate7/Coding Things/Task Manager/task_manager.py
 class Task:
     def __init__(self, title, description, status='Incomplete', created=None, number=None):
         
@@ -89,16 +82,6 @@ class Task:
         """
         Initializes a Task object.
 
-        :param title: The title of the task.
-        :type title: str
-        :param description: The description of the task.
-        :type description: str
-        :param status: The status of the task. Defaults to 'Incomplete'.
-        :type status: str
-        :param created: The timestamp when the task was created. If not provided, the current time is used.
-        :type created: str or None
-        :param number: The number of the task. If not provided, it is not set.
-        :type number: int or None
         """
         self.title = title
         self.description = description
@@ -118,8 +101,6 @@ class TaskManager:
         Loads tasks from the JSON file, creates a list of Task objects,
         fixes missing numbers, and saves the tasks back to the JSON file.
 
-        :param self: The TaskManager object.
-        :type self: TaskManager
         """
         loaded_tasks = load_tasks()
         self.tasks = [Task(**task) for task in loaded_tasks]
@@ -138,12 +119,7 @@ class TaskManager:
         
         """
         Adds a new task to the task list.
-
-        :param title: The title of the task.
-        :type title: str
-        :param description: The description of the task.
-        :type description: str
-        :return: None
+        
         """
         self.next_number += 1
         task = Task(title, description, status='Incomplete', number=self.next_number)
@@ -154,10 +130,7 @@ class TaskManager:
     def mark_task_complete(self, title):
         """
         Marks a task as complete in the task manager.
-        Args:
-            title (str): The title of the task to be marked as complete.
-        Returns:
-            None
+      
         Prints:
             - A success message if the task is marked as complete successfully.
             - An error message if no task with the provided title is found.
@@ -187,10 +160,7 @@ class TaskManager:
     def delete_task(self, title):
         """
         Deletes a task from the task manager.
-        Args:
-            title (str): The title of the task to be deleted.
-        Returns:
-            None
+       
         Prints:
             - A success message if the task is deleted successfully.
             - An error message if no task with the provided title is found.
@@ -205,7 +175,7 @@ class TaskManager:
     def clear_task(self):
         """
         Clears all tasks from the task list.
-        :return: None
+     
         """
         self.tasks.clear()
         console.print('Task list cleared!', style='bold green')
@@ -290,7 +260,6 @@ def main():
 
     The loop continues until the user chooses to exit the application.
 
-    :return: None
     '''
     task_manager = TaskManager()
     try:
